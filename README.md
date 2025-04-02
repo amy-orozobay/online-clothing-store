@@ -9,7 +9,7 @@
 - **Goal**: End-to-end testing of UI (Selenium) and API (RestAssured) with BDD (Cucumber) and CI/CD (Jenkins).
 - **Team**:
     - Amy Orozobay (https://github.com/amy-orozobay)
-    - Shevket Dzhaparov (https://github.com/)
+    - Shevket Dzhaparov (https://github.com/shevket-dzhapar-qa)
     - Teammate 3 (https://github.com/)
 - **Scope**:
     - **UI Tests**: Login, product search, cart, checkout.
