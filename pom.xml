@@ -93,7 +93,7 @@
 
     <build>
         <plugins>
-            <!-- Java Compiler Plugin -->
+            <!-- Java Compiler Plugin. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
