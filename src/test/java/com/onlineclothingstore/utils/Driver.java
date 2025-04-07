@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import java.time.Duration;
+
 public class Driver {
 
     private static WebDriver driver;
@@ -22,7 +24,8 @@ public class Driver {
             } else {
                 throw new RuntimeException("Unsupported browser: " + browser);
             }
-
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
             driver.manage().window().maximize();
         }
     }
