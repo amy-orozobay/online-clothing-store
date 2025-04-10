@@ -4,23 +4,30 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-    public class ConfigReader {
-        private static Properties properties;
+public class ConfigReader {
+    private static Properties properties;
 
-        static {
+    static {
+        String filePath = "src/test/resources/properties/onlinestore.properties";
+        FileInputStream input = null;
+        try {
+            input = new FileInputStream(filePath);
+            properties = new Properties();
+            properties.load(input);
+        } catch (IOException e) {
+            System.out.println("File not found");
+        } finally {
             try {
-                FileInputStream file = new FileInputStream("src/test/resources/configs/config.properties"); // Path to properties
-                properties = new Properties();
-                properties.load(file);
-                file.close();
+                assert input != null;
+                input.close();
             } catch (IOException e) {
                 e.printStackTrace();
-                throw new RuntimeException("Ошибка при загрузке config.properties");
             }
         }
-
-        public static String getProperty(String key) {
-            return properties.getProperty(key);
-        }
     }
+
+    public static String getProperty(String key) {
+        return properties.getProperty(key);
+    }
+}
 
