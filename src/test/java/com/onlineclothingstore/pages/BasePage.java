@@ -38,7 +38,12 @@ public abstract class BasePage {
     public void goToCartPage() {
         helper.waitForVisibilityOfElement(cartBtn, 10).click();
     }
+
     public void goToSignUpLoginPage() {
         helper.waitForVisibilityOfElement(signUpLoginBtn, 10).click();
+    }
+
+    public void goToProductsPage() {
+        helper.waitForVisibilityOfElement(productsBtn, 10).click();
     }
 }
