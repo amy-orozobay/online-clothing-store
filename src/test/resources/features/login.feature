@@ -1,5 +1,6 @@
+@Smoke
 Feature: Login Functionality
-
+  #need to re-write some steps, because there is "Before" hook where the user navigates to Base URL
   Background:
     Given I launch the browser
     When I navigate to "https://automationexercise.com"
