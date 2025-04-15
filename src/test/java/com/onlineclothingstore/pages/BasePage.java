@@ -16,7 +16,7 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    BrowserHelper helper = new BrowserHelper(driver);
+    BrowserHelper helper = new BrowserHelper();
 
     @FindBy(xpath = "//ul[@class='nav navbar-nav']//li[1]")
     protected WebElement homeBtn;
@@ -25,7 +25,7 @@ public abstract class BasePage {
     @FindBy(xpath = "//ul[@class='nav navbar-nav']//li[3]")
     protected WebElement cartBtn;
     @FindBy(xpath = "//ul[@class='nav navbar-nav']//li[4]")
-    protected WebElement signUpLoginBtn;
+    protected WebElement signupLoginBtn;
     @FindBy(xpath = "//ul[@class='nav navbar-nav']//li[5]")
     protected WebElement testCasesBtn;
     @FindBy(xpath = "//ul[@class='nav navbar-nav']//li[6]")
@@ -36,9 +36,14 @@ public abstract class BasePage {
     protected WebElement contactUsBtn;
 
     public void goToCartPage() {
-        helper.waitForVisibilityOfElement(cartBtn, 10).click();
+        helper.waitForVisibilityOfElement(driver, cartBtn, 10).click();
     }
-    public void goToSignUpLoginPage() {
-        helper.waitForVisibilityOfElement(signUpLoginBtn, 10).click();
+
+    public void goToSignupLoginPage() {
+        helper.waitForVisibilityOfElement(driver, signupLoginBtn, 10).click();
+    }
+
+    public void goToProductsPage() {
+        helper.waitForVisibilityOfElement(driver, productsBtn, 20).click();
     }
 }

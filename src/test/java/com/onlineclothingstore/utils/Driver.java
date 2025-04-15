@@ -64,7 +64,6 @@ public class Driver {
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--proxy-server='direct://");
         options.addArguments("--proxy-bypass-list=*");
-        options.addArguments("--start-maximized");
         options.addArguments("--headless");
         return options;
     }

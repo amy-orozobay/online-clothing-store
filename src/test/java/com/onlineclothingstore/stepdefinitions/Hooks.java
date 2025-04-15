@@ -11,11 +11,9 @@ public class Hooks {
     public Hooks() {
     }
 
-    WebDriver driver = Driver.getDriver();
-
     @Before
     public void the_user_is_on_homepage() {
-        driver.get(ConfigReader.getProperty("baseUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("baseUrl"));
     }
 
     @After
