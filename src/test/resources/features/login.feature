@@ -1,12 +1,10 @@
 @Smoke
 Feature: Login Functionality
-  #need to re-write some steps, because there is "Before" hook where the user navigates to Base URL
+
   Background:
-    Given I launch the browser
-    When I navigate to "https://automationexercise.com"
-    Then I should see the home page is visible
-    And I click on the "Signup / Login" button
+    Given I click on the "Signup / Login" button
     Then I should see "Login to your account" is visible
+
 
   Scenario: TC01 - Log in with valid credentials as a real user
     When I enter the email "trump@gmail.com" and password "donTrump123"
