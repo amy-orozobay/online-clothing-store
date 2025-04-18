@@ -1,3 +1,4 @@
+com\onlineclothingstore\ui\pages\LoginPage.class
 com\onlineclothingstore\utils\Driver.class
 com\onlineclothingstore\stepdefinitions\AddProductsToCartSteps.class
 com\onlineclothingstore\utils\BrowserHelper.class
