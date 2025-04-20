@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -23,39 +24,78 @@ public class Driver {
     private Driver() {
     }
 
+//    public static WebDriver getDriver() {
+//        if (driver == null) {
+//            //Initialize WebDriver if it hasn't been initialized yet
+//            String browser = ConfigReader.getProperty("browser");
+//            switch (browser.toLowerCase()) {
+//                case "firefox":
+//                    WebDriverManager.firefoxdriver().setup();
+//                    driver = new FirefoxDriver();
+//                    break;
+//                case "safari":
+//                    driver = new SafariDriver();
+//                    break;
+//                case "ie":
+//                    WebDriverManager.iedriver().setup();
+//                    driver = new InternetExplorerDriver();
+//                    break;
+//                case "headless":
+//                    ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
+//                    ChromeOptions options = getChromeOptions();
+//                    driver = new ChromeDriver(options);
+//                    break;
+//                case "chrome":
+//                default:
+//                    WebDriverManager.chromedriver().setup();
+//                    driver = new ChromeDriver();
+//                    break;
+//            }
+//        }
+//        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+//        driver.manage().window().maximize();
+//        return driver;
+//    }
+
     public static WebDriver getDriver() {
         if (driver == null) {
-            //Initialize WebDriver if it hasn't been initialized yet
-            String browser = ConfigReader.getProperty("browser");
-            switch (browser.toLowerCase()) {
+            String browser = ConfigReader.getProperty("browser").toLowerCase();
+            boolean headless = Boolean.parseBoolean(ConfigReader.getProperty("headless"));
+
+            switch (browser) {
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    if (headless) firefoxOptions.setHeadless(true);
+                    driver = new FirefoxDriver(firefoxOptions);
                     break;
+
                 case "safari":
-                    driver = new SafariDriver();
+                    driver = new SafariDriver(); // Safari НЕ поддерживает headless
                     break;
+
                 case "ie":
                     WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver();
+                    driver = new InternetExplorerDriver(); // IE тоже НЕ поддерживает headless
                     break;
-                case "headless":
-                    ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
-                    ChromeOptions options = getChromeOptions();
-                    driver = new ChromeDriver(options);
-                    break;
+
                 case "chrome":
                 default:
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    if (headless) chromeOptions.addArguments("--headless=new"); // или "--headless"
+                    driver = new ChromeDriver(chromeOptions);
                     break;
             }
+
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+            driver.manage().window().maximize();
         }
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
-        driver.manage().window().maximize();
         return driver;
     }
+
 
     private static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();

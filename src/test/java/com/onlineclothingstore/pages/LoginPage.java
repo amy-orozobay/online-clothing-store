@@ -1,4 +1,4 @@
-package com.onlineclothingstore.ui.pages;
+package com.onlineclothingstore.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -48,3 +48,4 @@ public class LoginPage {
         return errorMessage.getText();
     }
 }
+
