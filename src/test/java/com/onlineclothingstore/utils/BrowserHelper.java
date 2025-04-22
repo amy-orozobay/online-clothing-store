@@ -2,6 +2,7 @@ package com.onlineclothingstore.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -62,5 +63,15 @@ public class BrowserHelper {
                 "document.querySelectorAll('iframe[id^=\"aswift_\"], iframe[id^=\"google_ads_iframe\"]')" +
                         ".forEach(iframe => iframe.remove());"
         );
+    }
+
+    public void selectFromDropdownByValue(WebElement dropdown, String value) {
+        Select select = new Select(dropdown);
+        select.selectByValue(value);
+    }
+
+    public void selectFromDropdownByVisibleText(WebElement dropdown, String visibleText) {
+        Select select = new Select(dropdown);
+        select.selectByVisibleText(visibleText);
     }
 }
