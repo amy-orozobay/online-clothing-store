@@ -84,7 +84,9 @@ public class Driver {
                 default:
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    if (headless) chromeOptions.addArguments("--headless=new"); // или "--headless"
+                    if (headless) {
+                         chromeOptions = getChromeOptions();
+                    }
                     driver = new ChromeDriver(chromeOptions);
                     break;
             }
@@ -95,6 +97,8 @@ public class Driver {
         }
         return driver;
     }
+
+
 
 
     private static ChromeOptions getChromeOptions() {

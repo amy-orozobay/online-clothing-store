@@ -4,9 +4,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import com.onlineclothingstore.utils.Driver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -73,17 +71,41 @@ public class LoginSteps {
         assertTrue(errorMessageElement.getText().contains(expectedErrorMessage), "Expected error message was not displayed");
     }
 
-    @When("I click the {string} button")
-    public void i_click_the_button(String buttonLabel) {
-        // Wait for the button to be clickable using the data-qa attribute
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
-        // Use the data-qa attribute to locate the button exactly
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-qa='login-button']")));
+@When("I click the {string} button")
+public void i_click_the_button(String buttonLabel) {
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
-        // Click on the button
-        button.click();
+    String dataQaValue = "";
+
+    switch (buttonLabel.toLowerCase()) {
+        case "login":
+            dataQaValue = "login-button";
+            break;
+        case "create account":
+            dataQaValue = "create-account";
+            break;
+        case "continue":
+            dataQaValue = "continue-button";
+            break;
+        default:
+            throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
     }
+
+    By buttonLocator = By.xpath("//button[@data-qa='" + dataQaValue + "']");
+    WebElement button = wait.until(ExpectedConditions.elementToBeClickable(buttonLocator));
+
+    try {
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
+        Thread.sleep(500);
+        button.click();
+    } catch (ElementClickInterceptedException e) {
+        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", button);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+
 
 
 
@@ -120,83 +142,3 @@ public class LoginSteps {
         assertEquals("Fill out this field", expectedMessage, actualMessage);
     }
 }
-
-//package com.onlineclothingstore.stepdefinitions;
-//
-//import com.onlineclothingstore.ui.pages.LoginPage;
-//import com.onlineclothingstore.utils.Driver;
-//import io.cucumber.java.en.Given;
-//import io.cucumber.java.en.Then;
-//import io.cucumber.java.en.When;
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.support.ui.ExpectedConditions;
-//import org.openqa.selenium.support.ui.WebDriverWait;
-//
-//import java.time.Duration;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//
-//public class LoginSteps {
-//
-//    LoginPage loginPage = new LoginPage();
-//
-//    @Given("I launch the browser")
-//    public void i_launch_the_browser() {
-//        // Инициализация браузера происходит в Driver.getDriver()
-//    }
-//
-//    @When("I navigate to {string}")
-//    public void i_navigate_to(String url) {
-//        // Навигация на URL
-//        WebDriver driver = Driver.getDriver();
-//        driver.get(url);
-//    }
-//
-//    @Then("I should see the home page is visible")
-//    public void i_should_see_the_home_page_is_visible() {
-//        // Проверка видимости ссылки на вход
-//        WebDriver driver = Driver.getDriver();
-//        WebElement loginLink = driver.findElement(By.xpath("//a[@href='/login']"));
-//        assertTrue(loginLink.isDisplayed(), "Home page is not visible");
-//    }
-//
-//    @Then("I click on the {string} button")
-//    public void i_click_on_the_button(String buttonLabel) {
-//        // Кликаем по кнопке входа
-//        loginPage.clickLoginButton();
-//    }
-//
-//    @Then("I should see {string} is visible")
-//    public void i_should_see_is_visible(String expectedText) {
-//        // Проверка видимости заголовка
-//        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-//        WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='" + expectedText + "']")));
-//        assertTrue(heading.isDisplayed(), "Element with text '" + expectedText + "' is not visible");
-//    }
-//
-//    @When("I enter the email {string} and password {string}")
-//    public void i_enter_the_email_and_password(String email, String password) {
-//        // Вводим email и пароль
-//        loginPage.enterEmail(email);
-//        loginPage.enterPassword(password);
-//    }
-//
-//    @Then("I should see {string} on the home page")
-//    public void i_should_see_on_the_home_page(String text) {
-//        // Проверка, что текст виден на главной странице
-//        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-//        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//b[text()='" + text + "']")));
-//        assertTrue(element.isDisplayed(), "The text '" + text + "' is not visible on the home page");
-//    }
-//
-//    @Then("I should see an error message {string}")
-//    public void i_should_see_an_error_message(String expectedErrorMessage) {
-//        // Проверка сообщения об ошибке
-//        String actualMessage = loginPage.getErrorMessage();
-//        assertTrue(actualMessage.contains(expectedErrorMessage), "Expected error message was not displayed");
-//    }
-//}
-//

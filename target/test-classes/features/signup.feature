@@ -2,23 +2,26 @@
 Feature: Signup Functionality
 
   Background:
-    Given I click on the "Signup / Login" button
-    Then I should see "New User Signup!" is visible
+    Given I am clicking on the "Signup / Login" button
 
   Scenario: TC01 - Successfully create new user and after that delete it
     When I enter the name "Joe" and email "joe@biden.com"
     And I am clicking the "Signup" button
     Then I should see the "Enter Account Information" page
     When I fill out the signup form with the following data:
-      | Name      | Joe Biden         |
-      | Email     | joe@biden.com     |
-      | Password  | JoeBiden123       |
-      | Address   | 1600 Penn Ave     |
-      | Country   | United States     |
-      | State     | NY                |
-      | City      | New York          |
-      | ZipCode   | 55577             |
-      | Mobile    | 1234567890        |
+      | Gender    | Mr            |
+      | First name | Joe           |
+      | Last name  | Biden         |
+      | Password  | JoeBiden123   |
+      | Address   | 1600 Penn Ave |
+      | Country   | United States |
+      | State     | NY            |
+      | City      | New York      |
+      | Zipcode   | 55577         |
+      | Mobile    | 1234567890    |
+      | Day       | 15            |
+      | Month     | 6             |
+      | Year      | 1990          |
     And I click the "Create Account" button
     Then I should see the message "Account Created!"
     And I click the "Continue" button
