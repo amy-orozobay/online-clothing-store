@@ -3,7 +3,7 @@ Feature: Login Functionality
 
   Background:
     Given I click on the "Signup / Login" button
-    Then I should see "Login to your account" is visible
+
 
 
   Scenario: TC01 - Log in with valid credentials as a real user

@@ -1,6 +1,8 @@
 package com.onlineclothingstore.pages;
 
 import com.onlineclothingstore.utils.BrowserHelper;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,4 +48,5 @@ public abstract class BasePage {
     public void goToProductsPage() {
         helper.waitForVisibilityOfElement(driver, productsBtn, 20).click();
     }
+
 }
