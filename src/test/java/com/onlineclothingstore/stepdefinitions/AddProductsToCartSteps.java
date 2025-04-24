@@ -48,7 +48,6 @@ public class AddProductsToCartSteps {
             productsPage.addGivenProductToCart(i);
             assertTrue(productsPage.getAddedToCartMessageText().contains("added to cart"), "Added to cart confirmation message mismatch for product " + i);
             productsPage.clickContinueShoppingBtnAfterAddingToCart();
-            i++;
         }
         expectedDetailsMap = map;
     }
@@ -62,13 +61,13 @@ public class AddProductsToCartSteps {
             actualDetailsMap.put(i, cartPage.getCartItemDetails(i));
         }
         //validate expected and actual details
-        for (int i = 0; i < numOfProducts; i++) {
+        for (int i = 1; i < numOfProducts; i++) {
             List<String> expectedProductDetailsList = expectedDetailsMap.get(i);
             List<String> actualProductsDetailsList = actualDetailsMap.get(i);
-            assertEquals(expectedProductDetailsList.getFirst(), actualProductsDetailsList.getFirst(), "Product name mismatch for product +" + i);
-            assertEquals(expectedProductDetailsList.get(1), actualProductsDetailsList.get(1), "Price mismatch for product +" + i);
-            assertEquals(expectedProductDetailsList.get(2), actualProductsDetailsList.get(2), "Quantity mismatch for product +" + i);
-            assertEquals(expectedProductDetailsList.get(3), actualProductsDetailsList.get(3), "Total mismatch for product +" + i);
+            assertEquals(expectedProductDetailsList.getFirst(), actualProductsDetailsList.getFirst(), "Product name mismatch for product " + i);
+            assertEquals(expectedProductDetailsList.get(1), actualProductsDetailsList.get(1), "Price mismatch for product " + i);
+            assertEquals(expectedProductDetailsList.get(2), actualProductsDetailsList.get(2), "Quantity mismatch for product " + i);
+            assertEquals(expectedProductDetailsList.get(3), actualProductsDetailsList.get(3), "Total mismatch for product " + i);
         }
         expectedDetailsMap.clear();
     }

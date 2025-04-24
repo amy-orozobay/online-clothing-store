@@ -1,18 +1,10 @@
 package com.onlineclothingstore.utils;
 
+import com.onlineclothingstore.utils.Browser.*;
 import io.cucumber.java.Scenario;
-import io.github.bonigarcia.wdm.config.DriverManagerType;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.safari.SafariDriver;
 
 import java.time.Duration;
 
@@ -24,92 +16,33 @@ public class Driver {
     private Driver() {
     }
 
-//    public static WebDriver getDriver() {
-//        if (driver == null) {
-//            //Initialize WebDriver if it hasn't been initialized yet
-//            String browser = ConfigReader.getProperty("browser");
-//            switch (browser.toLowerCase()) {
-//                case "firefox":
-//                    WebDriverManager.firefoxdriver().setup();
-//                    driver = new FirefoxDriver();
-//                    break;
-//                case "safari":
-//                    driver = new SafariDriver();
-//                    break;
-//                case "ie":
-//                    WebDriverManager.iedriver().setup();
-//                    driver = new InternetExplorerDriver();
-//                    break;
-//                case "headless":
-//                    ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
-//                    ChromeOptions options = getChromeOptions();
-//                    driver = new ChromeDriver(options);
-//                    break;
-//                case "chrome":
-//                default:
-//                    WebDriverManager.chromedriver().setup();
-//                    driver = new ChromeDriver();
-//                    break;
-//            }
-//        }
-//        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
-//        driver.manage().window().maximize();
-//        return driver;
-//    }
-
     public static WebDriver getDriver() {
         if (driver == null) {
             String browser = ConfigReader.getProperty("browser").toLowerCase();
-            boolean headless = Boolean.parseBoolean(ConfigReader.getProperty("headless"));
+            Browser browserStrategy;
 
             switch (browser) {
                 case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    if (headless) firefoxOptions.setHeadless(true);
-                    driver = new FirefoxDriver(firefoxOptions);
+                    browserStrategy = new FirefoxBrowser();
                     break;
-
                 case "safari":
-                    driver = new SafariDriver(); // Safari НЕ поддерживает headless
+                    browserStrategy = new SafariBrowser();
                     break;
-
                 case "ie":
-                    WebDriverManager.iedriver().setup();
-                    driver = new InternetExplorerDriver(); // IE тоже НЕ поддерживает headless
+                    browserStrategy = new IEBrowser();
                     break;
-
                 case "chrome":
                 default:
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions chromeOptions = new ChromeOptions();
-                    if (headless) {
-                         chromeOptions = getChromeOptions();
-                    }
-                    driver = new ChromeDriver(chromeOptions);
+                    browserStrategy = new ChromeBrowser();
                     break;
             }
 
+            driver = browserStrategy.createDriver();
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
             driver.manage().window().maximize();
         }
         return driver;
-    }
-
-
-
-
-    private static ChromeOptions getChromeOptions() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--window-size=1920, 1080");
-        options.addArguments("disable-extensions");
-        options.setExperimentalOption("useAutomationExtension", false);
-        options.addArguments("--proxy-server='direct://");
-        options.addArguments("--proxy-bypass-list=*");
-        options.addArguments("--headless");
-        return options;
     }
 
     public static void takeScreenshot(Scenario scenario) {
