@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,16 +56,16 @@ public class ProductsPage extends BasePage {
         helper.waitForVisibilityOfElement(driver, continueShoppingBtn, 10).click();
     }
 
-    public Map<String, String> getProductDetails(int productId, int quantity) {
-        Map<String, String> productDetails = new HashMap<>();
+    public List<String> getProductDetails(int productId, int quantity) {
+        List<String> productDetails = new ArrayList<>();
         WebElement product = allProducts.get(productId - 1);
         WebElement name = product.findElement(By.xpath(".//p"));
-        productDetails.put("productName", name.getText());
+        productDetails.addFirst(name.getText());
         WebElement price = product.findElement(By.xpath(".//h2"));
-        productDetails.put("price", price.getText());
-        productDetails.put("quantity", Integer.toString(quantity));
+        productDetails.add(1, price.getText());
+        productDetails.add(2, Integer.toString(quantity));
         int total = quantity * helper.getIntPriceFromElement(price);
-        productDetails.put("total", Integer.toString(total));
+        productDetails.add(3, Integer.toString(total));
         return productDetails;
     }
 }

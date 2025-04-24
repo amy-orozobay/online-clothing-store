@@ -27,6 +27,7 @@ public class LoginSteps {
 
     @Then("I click on the {string} button")
     public void i_click_on_the_button(String buttonLabel) {
+
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         WebElement loginLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/login']")));
 
@@ -44,6 +45,7 @@ public class LoginSteps {
 
     @When("I enter the email {string} and password {string}")
     public void i_enter_the_email_and_password(String email, String password) {
+
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-qa='login-email']")));
         WebElement passwordField = Driver.getDriver().findElement(By.cssSelector("[data-qa='login-password']"));
@@ -55,6 +57,7 @@ public class LoginSteps {
 
     @Then("I should see {string} on the home page")
     public void i_should_see_on_the_home_page(String text) {
+
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//b[text()='" + text + "']")));
 
@@ -64,6 +67,7 @@ public class LoginSteps {
 
     @Then("I should see an error message {string}")
     public void i_should_see_an_error_message(String expectedErrorMessage) {
+
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         WebElement errorMessageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'incorrect')]")));
 
@@ -103,6 +107,7 @@ public void i_click_the_button(String buttonLabel) {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", button);
     } catch (InterruptedException e) {
         e.printStackTrace();
+
     }
 }
 

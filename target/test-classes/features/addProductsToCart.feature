@@ -1,8 +1,14 @@
 @Smoke
 Feature: Add products to cart
 
-  Scenario: Add a single product to the cart and verify it appears correctly
+  Background:
     Given the user navigated to the "Products" page
-    When the user adds 1 product to the cart
-    Then the cart should display product name, price, quantity,and total for that item
 
+  Scenario Outline: Add products to the cart and verify details appear correctly
+    When the user adds <numOfProducts> products to the cart
+    Then the cart should display correct products details for each of <numOfProducts> items
+
+    Examples:
+      | numOfProducts |
+      | 1             |
+      | 3             |

@@ -4,6 +4,8 @@ Feature: Login Functionality
   Background:
     Given I click on the "Signup / Login" button
 
+
+
   Scenario: TC01 - Log in with valid credentials as a real user
     When I enter the email "trump@gmail.com" and password "donTrump123"
     And I click the "login" button
