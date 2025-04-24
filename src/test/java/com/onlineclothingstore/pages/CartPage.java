@@ -27,7 +27,8 @@ public class CartPage extends BasePage {
         cartItemDetails.addFirst(productName.getText());
         cartItemDetails.add(1, price.getText());
         cartItemDetails.add(2, quantity.getText());
-        cartItemDetails.add(3, total.getText());
+        String totalPrice = total.getText();
+        cartItemDetails.add(3, totalPrice.substring(totalPrice.indexOf(".")+2));
         return cartItemDetails;
     }
 }
