@@ -86,6 +86,8 @@ public class Driver {
                     ChromeOptions chromeOptions = new ChromeOptions();
                     if (headless) {
                          chromeOptions = getChromeOptions();
+                    } else {
+                        chromeOptions.addArguments("--disable-save-addresses");
                     }
                     driver = new ChromeDriver(chromeOptions);
                     break;
@@ -109,6 +111,7 @@ public class Driver {
         options.addArguments("--proxy-server='direct://");
         options.addArguments("--proxy-bypass-list=*");
         options.addArguments("--headless");
+        options.addArguments("--disable-save-addresses");
         return options;
     }
 

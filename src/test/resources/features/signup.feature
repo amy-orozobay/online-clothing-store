@@ -5,13 +5,13 @@ Feature: Signup Functionality
     Given I am clicking on the "Signup / Login" button
 
   Scenario: TC01 - Successfully create new user and after that delete it
-    When I enter the name "Joe" and email "joe@biden.com"
+    When I enter the name "Joe" and email "joe2@biden.com"
     And I am clicking the "Signup" button
     Then I should see the "Enter Account Information" page
     When I fill out the signup form with the following data:
       | Gender    | Mr            |
-      | First name | Joe           |
-      | Last name  | Biden         |
+      | First name | Joe          |
+      | Last name  | Biden        |
       | Password  | JoeBiden123   |
       | Address   | 1600 Penn Ave |
       | Country   | United States |
