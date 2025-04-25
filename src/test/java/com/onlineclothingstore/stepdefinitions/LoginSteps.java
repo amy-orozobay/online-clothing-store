@@ -1,5 +1,6 @@
 package com.onlineclothingstore.stepdefinitions;
 
+import com.onlineclothingstore.pages.SignupLoginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginSteps {
 
+    SignupLoginPage signupLoginPage = new SignupLoginPage(Driver.getDriver());
 
     @Then("I should see the home page is visible")
     public void i_should_see_the_home_page_is_visible() {
@@ -76,40 +78,56 @@ public class LoginSteps {
     }
 
 
-@When("I click the {string} button")
-public void i_click_the_button(String buttonLabel) {
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
-    String dataQaValue = "";
+    @When("I click the {string} button")
+    public void i_click_the_button(String buttonLabel) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        String dataQaValue = "";
 
-    switch (buttonLabel.toLowerCase()) {
-        case "login":
-            dataQaValue = "login-button";
-            break;
-        case "create account":
-            dataQaValue = "create-account";
-            break;
-        case "continue":
-            dataQaValue = "continue-button";
-            break;
-        default:
-            throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
+        switch (buttonLabel.toLowerCase()) {
+            case "signup":
+                signupLoginPage.clickSignupButton();
+                return;
+
+            case "delete account":
+                signupLoginPage.clickDeleteAccountLink();
+                return;
+
+            case "login":
+                dataQaValue = "login-button";
+                break;
+
+            case "create account":
+                dataQaValue = "create-account";
+                break;
+
+            case "continue":
+                dataQaValue = "continue-button";
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unknown button label: " + buttonLabel);
+        }
+
+        // Handle buttons with data-qa (universal way)
+        By buttonLocator = By.xpath("//button[@data-qa='" + dataQaValue + "'] | //a[@data-qa='" + dataQaValue + "']");
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(buttonLocator));
+
+        try {
+            ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
+            Thread.sleep(500);
+
+            if (buttonLabel.equalsIgnoreCase("continue")) {
+                ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", button);
+            } else {
+                button.click();
+            }
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", button);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-
-    By buttonLocator = By.xpath("//button[@data-qa='" + dataQaValue + "']");
-    WebElement button = wait.until(ExpectedConditions.elementToBeClickable(buttonLocator));
-
-    try {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
-        Thread.sleep(500);
-        button.click();
-    } catch (ElementClickInterceptedException e) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", button);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-
-    }
-}
 
 
 
