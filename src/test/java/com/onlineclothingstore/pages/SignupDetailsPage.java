@@ -1,5 +1,7 @@
 package com.onlineclothingstore.pages;
+import com.onlineclothingstore.pages.BasePage;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,15 +57,22 @@ public class SignupDetailsPage extends BasePage {
     @FindBy(xpath = "//button[@data-qa='create-account']")
     private WebElement createAccountButton;
 
-    @FindBy(id = "id_gender1") // Для "Mr."
+    @FindBy(id = "id_gender1") // For "Mr."
     protected WebElement mrRadioButton;
 
-    @FindBy(id = "id_gender2") // Для "Mrs."
+    @FindBy(id = "id_gender2") // For "Mrs."
     protected WebElement mrsRadioButton;
 
 
     // === METHODS ===
     public void fillSignupForm(Map<String, String> data) {
+        //  Delete iframes and adds, interfering click (ex: adds from Google)
+        ((JavascriptExecutor) driver).executeScript(
+                "document.querySelectorAll(\"iframe, div[id^='aswift'], ins.adsbygoogle\").forEach(el => el.style.display = 'none');"
+        );
+
+
+
         helper.waitForVisibilityOfElement(driver, passwordInput, 10).sendKeys(data.get("Password"));
         helper.selectFromDropdownByValue(dayDropdown, data.get("Day"));
         helper.selectFromDropdownByValue(monthDropdown, data.get("Month"));
@@ -71,12 +80,13 @@ public class SignupDetailsPage extends BasePage {
         firstNameInput.sendKeys(data.get("First name"));
         lastNameInput.sendKeys(data.get("Last name"));
         addressInput.sendKeys(data.get("Address"));
-        helper.selectFromDropdownByVisibleText(countryDropdown, data.get("Country"));
+        helper.selectFromDropdownByVisibleText(countryDropdown, data.get("Country")); // ← эта строка и была проблемной
         stateInput.sendKeys(data.get("State"));
         cityInput.sendKeys(data.get("City"));
         zipCodeInput.sendKeys(data.get("Zipcode"));
         mobileInput.sendKeys(data.get("Mobile"));
     }
+
 
     public void selectGender(String gender) {
         if (gender.equalsIgnoreCase("Mr")) {

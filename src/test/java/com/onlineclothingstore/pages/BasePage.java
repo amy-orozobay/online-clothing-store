@@ -3,6 +3,7 @@ package com.onlineclothingstore.pages;
 import com.onlineclothingstore.utils.BrowserHelper;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,6 +37,8 @@ public abstract class BasePage {
     protected WebElement videoTutorialsBtn;
     @FindBy(xpath = "//ul[@class='nav navbar-nav']//li[8]")
     protected WebElement contactUsBtn;
+    @FindBy(xpath = "//a[@href='/delete_account']")
+    protected WebElement deleteAccountLink;
 
     public void goToCartPage() {
         helper.waitForVisibilityOfElement(driver, cartBtn, 10).click();
@@ -48,5 +51,23 @@ public abstract class BasePage {
     public void goToProductsPage() {
         helper.waitForVisibilityOfElement(driver, productsBtn, 20).click();
     }
+
+
+public void clickDeleteAccountLink() {
+    // hide all adds which interfering click
+    ((JavascriptExecutor) driver).executeScript(
+            "document.querySelectorAll(\"iframe, div[id^='aswift'], ins.adsbygoogle\").forEach(el => el.style.display = 'none');"
+    );
+
+    // wait for visibility
+    WebElement link = helper.waitForVisibilityOfElement(driver, deleteAccountLink, 10);
+
+    // scroll to link
+    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", link);
+
+    // click through JS, just in case
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", link);
+}
+
 
 }
