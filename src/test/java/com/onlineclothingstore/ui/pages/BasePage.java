@@ -1,8 +1,6 @@
-package com.onlineclothingstore.pages;
+package com.onlineclothingstore.ui.pages;
 
 import com.onlineclothingstore.utils.BrowserHelper;
-import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

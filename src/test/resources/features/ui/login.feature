@@ -1,4 +1,4 @@
-@Smoke
+@Smoke @UI
 Feature: Login Functionality
 
   Background:

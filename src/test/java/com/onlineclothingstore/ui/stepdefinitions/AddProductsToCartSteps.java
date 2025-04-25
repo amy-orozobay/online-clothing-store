@@ -1,14 +1,12 @@
-package com.onlineclothingstore.stepdefinitions;
+package com.onlineclothingstore.ui.stepdefinitions;
 
-import com.onlineclothingstore.pages.CartPage;
-import com.onlineclothingstore.pages.ProductsPage;
-import com.onlineclothingstore.pages.SignupLoginPage;
-import com.onlineclothingstore.utils.BrowserHelper;
+import com.onlineclothingstore.ui.pages.CartPage;
+import com.onlineclothingstore.ui.pages.ProductsPage;
+import com.onlineclothingstore.ui.pages.SignupLoginPage;
 import com.onlineclothingstore.utils.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.sl.In;
 import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;

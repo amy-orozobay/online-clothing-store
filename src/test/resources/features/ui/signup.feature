@@ -1,4 +1,4 @@
-@Smoke
+@Smoke @UI
 Feature: Signup Functionality
 
   Background:

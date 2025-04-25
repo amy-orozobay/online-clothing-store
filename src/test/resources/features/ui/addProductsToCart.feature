@@ -1,4 +1,4 @@
-@Smoke
+@Smoke @UI
 Feature: Add products to cart
 
   Background:

@@ -1,4 +1,4 @@
-package com.onlineclothingstore.pages;
+package com.onlineclothingstore.ui.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

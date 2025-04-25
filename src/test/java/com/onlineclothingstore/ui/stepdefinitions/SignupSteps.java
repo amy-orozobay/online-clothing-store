@@ -1,8 +1,8 @@
-package com.onlineclothingstore.stepdefinitions;
+package com.onlineclothingstore.ui.stepdefinitions;
 
-import com.onlineclothingstore.pages.AccountCreatedOrDeletedPage;
-import com.onlineclothingstore.pages.SignupDetailsPage;
-import com.onlineclothingstore.pages.SignupLoginPage;
+import com.onlineclothingstore.ui.pages.AccountCreatedOrDeletedPage;
+import com.onlineclothingstore.ui.pages.SignupDetailsPage;
+import com.onlineclothingstore.ui.pages.SignupLoginPage;
 import com.onlineclothingstore.utils.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

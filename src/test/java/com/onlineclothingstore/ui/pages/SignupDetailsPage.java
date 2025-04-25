@@ -1,5 +1,4 @@
-package com.onlineclothingstore.pages;
-import com.onlineclothingstore.pages.BasePage;
+package com.onlineclothingstore.ui.pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

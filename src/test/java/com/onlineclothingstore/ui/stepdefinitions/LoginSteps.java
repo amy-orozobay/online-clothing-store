@@ -1,8 +1,6 @@
-package com.onlineclothingstore.stepdefinitions;
+package com.onlineclothingstore.ui.stepdefinitions;
 
-import com.onlineclothingstore.pages.SignupLoginPage;
-import io.cucumber.java.After;
-import io.cucumber.java.en.Given;
+import com.onlineclothingstore.ui.pages.SignupLoginPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
@@ -36,14 +34,6 @@ public class LoginSteps {
         loginLink.click();
     }
 
-//    @Then("I should see {string} is visible")
-//    public void i_should_see_is_visible(String expectedText) {
-//        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-//        WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='" + expectedText + "']")));
-//
-//        // Verify that the element is displayed
-//        assertTrue(heading.isDisplayed(), "Element with text '" + expectedText + "' is not visible");
-//    }
 
     @When("I enter the email {string} and password {string}")
     public void i_enter_the_email_and_password(String email, String password) {
