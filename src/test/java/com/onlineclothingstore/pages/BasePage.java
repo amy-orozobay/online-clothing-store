@@ -53,6 +53,7 @@ public abstract class BasePage {
     }
 
 
+    //visible only when signed in
 public void clickDeleteAccountLink() {
     // hide all adds which interfering click
     ((JavascriptExecutor) driver).executeScript(
