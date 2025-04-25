@@ -19,23 +19,12 @@ public class Driver {
     public static WebDriver getDriver() {
         if (driver == null) {
             String browser = ConfigReader.getProperty("browser").toLowerCase();
-            Browser browserStrategy;
-
-            switch (browser) {
-                case "firefox":
-                    browserStrategy = new FirefoxBrowser();
-                    break;
-                case "safari":
-                    browserStrategy = new SafariBrowser();
-                    break;
-                case "ie":
-                    browserStrategy = new IEBrowser();
-                    break;
-                case "chrome":
-                default:
-                    browserStrategy = new ChromeBrowser();
-                    break;
-            }
+            Browser browserStrategy = switch (browser) {
+                case "firefox" -> new FirefoxBrowser();
+                case "safari" -> new SafariBrowser();
+                case "ie" -> new IEBrowser();
+                default -> new ChromeBrowser();
+            };
 
             driver = browserStrategy.createDriver();
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(600));
