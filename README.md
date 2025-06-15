@@ -8,7 +8,7 @@
 ## 🧪 **Project Overview**
 - **Goal**: End-to-end testing of UI (Selenium) and API (RestAssured) with BDD (Cucumber) and CI/CD (Jenkins).
 - **Team**:
-    - Amy Orozobay (https://github.com/amy-orozobay)
+    - Amy Ro (https://github.com/amyro5)
     - Shevket Dzhaparov (https://github.com/shevket-dzhapar-qa)
     - Teammate 3 (https://github.com/)
 - **Scope**:
@@ -44,10 +44,10 @@
 
 ### 🔹 **How to Get the Project**
 Clone:  
-`git clone https://github.com/amy-orozobay/online-clothing-store.git
+`git clone https://github.com/amyro5/online-clothing-store.git
 `
 ### 🔹 **Get Access to Push**
-- send your github to repo admin @amy-orozobay to add you via:
+- send your github to repo admin @amyro5 to add you via:
 GitHub Settings → Collaborators → Add People. 
 - Accept the email invitation.
 
